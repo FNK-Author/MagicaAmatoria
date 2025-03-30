@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <!-- Responsive Meta-Tag -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Magica Amatoria: Die Kunst des Verbotenen</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      overflow: hidden;
+      font-family: Garamond, sans-serif;
+      height: 100%;
+    }
+    /* Container für den gesamten Inhalt */
+    #contentContainer {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 50px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Cover-Container als Hintergrundbild */
+    #coverContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+    #coverContainer img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    /* Buch-Container: feste Maße für Desktops, später responsive */
+    #bookContainer {
+      display: none;
+      position: absolute;
+      width: calc(730px * 4 + 90px);
+      height: 1050px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 0;
+      z-index: 2;
+    }
+    /* Boxen mit fixen Pixelmaßen */
+    .box {
+      width: 730px;
+      height: 1050px;
+      background-color: transparent;
+      overflow-y: auto;
+      font-size: 32px;
+      color: black;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    /* Abstandshalter */
+    #spacer {
+      width: 90px;
+      height: 1050px;
+    }
+    /* Navigation Boxen (klickbar) */
+    .nav {
+      cursor: pointer;
+    }
+    /* Footer */
+    .footer {
+      height: 50px;
+      text-align: center;
+      line-height: 1.2;
+      color: white;
+      font-size: 24px;
+      position: relative;
+      top: -15px;
+    }
+    .footer .desc {
+      font-size: 14px;
+      color: white;
+    }
+    .footer a {
+      color: #027EBD;
+      text-decoration: none;
+    }
+    /* Inhalte in den Boxen */
+    .box h2, .box p, .box ul, .box li {
+      margin: 0;
+      padding: 0.5em 0;
+    }
+    .box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    /* Responsive Anpassungen für Smartphones */
+    @media only screen and (max-width: 768px) {
+      #bookContainer {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        left: 0;
+        top: 0;
+        transform: none;
+      }
+      .box {
+        width: 100%;
+        height: auto;
+        font-size: 18px;
+        padding: 10px;
+      }
+      #spacer {
+        display: none;
+      }
+      #contentContainer {
+        height: auto;
+        padding-bottom: 50px; /* Platz für Footer */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="contentContainer">
+    <!-- Cover (Buchvorderseite) -->
+    <div id="coverContainer">
+      <img id="coverImage" src="https://i.imgur.com/ijCe9Pd.png" alt="Buchcover">
+    </div>
+    <!-- Buch Container -->
+    <div id="bookContainer">
+      <div class="box nav" id="navLeft"></div>
+      <div class="box" id="leftPage"></div>
+      <div id="spacer"></div>
+      <div class="box" id="rightPage"></div>
+      <div class="box nav" id="navRight"></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="desc">
+      Dieses interaktive Buch aus der magischen Welt ist Teil der (NSFW) Fanfiktion "Die Hexe in der Nacht". Klicke auf die Seitenränder um umzublättern.
+    </div>
+    <div>
+      <span style="color:white;">by </span>
+      <a href="https://linktr.ee/fnk_fanfics" target="_blank">FNK</a>
+    </div>
+  </div>
+  
+  <audio id="audio" loop>
+    <source src="https://files.catbox.moe/53k8xn.mp3" type="audio/mp3">
+    Dein Browser unterstützt kein Audio-Element.
+  </audio>
+  <script>
+    let currentPage = 0;
+    const totalPages = 12;
+
+    const chapters = [
+      "I. Vorwort",
+      "II. Warum Magie und Sex kein verbotenes Thema sein sollte",
+      "III. Praktische Sex-Zaubersprüche für SIE, für IHN und für PAARE",
+      "IV. Sex-Tränke und deren Gefahren",
+      "V. Verhütung durch Zauberei",
+      "VI. Der-Zauber-Danach",
+      "VIII. Magische Lust Rituale",
+      "IX. Praktiken für Erfahrene",
+      "X. Persönliche Geschichten und Berichte",
+      "XI. Nachwort"
+    ];
+
+    const leftTexts = [
+      "Dieses Buch habe ich angefangen zu schreiben, als ich selbst noch zur Hogwarts Schule für Hexerei und Zauberei ging. Doch so wie die verbotenen dunklen Künste, wurde das Thema Sex zu meiner Zeit genau so behandelt, wie die unverzeihlichen Flüche. Ein Fehler, der dringend korrigiert werden musste.<br><br> So waren wir Schülerinnen und Schüler bestens geschult im Umgang mit Zauberstab und Kessel, doch wagte sich niemand Penis oder Vagina zu sagen - oder die Anwendung von Magie bei Sex in Betracht zu ziehen.<br><br>Während meiner Schulzeit war ich als die Sexhexe bekannt - ein Spitzname, den ich mir zwar nicht selbst gegeben, später aber dann akzeptiert habe. Ich war dem Tabu-Thema schon immer offen eingestellt und habe in meiner Freizeit vielen Mitschülern in Sache Liebe und Sex weitergeholfen. So lernte ich auch immer mehr über mich selbst. Während ich in anderen Fächern ziemlich versagte, glänzte ich in meiner eigenen Forschung: das Wagnis Sex und Magie in Einklang zu bringen.",
+      "Sex ist toll. Das innige Gefühl miteinander zu kuscheln, sich zu küssen oder ineinander einzudringen ist überwältigend. Meiner Meinung nach fühlt sich guter Sex bereits magisch an. Während zur Zeit meiner Eltern Sex lediglich für die Fortpflanzung angedacht war, ist diese Ansicht heute nicht mehr aktuell. Sex macht Spaß und ist lustvoll. Man sollte so oft es geht Sex haben, doch es gibt natürlich ein wenig was zu beachten. Ungeplante Schwangerschaften, Krankheiten oder schiefgegangene Zauber oder Tränke sind Fälle die eintreten können und man muss wissen, wie man sich richtig schützen kann.<br><br>Verantwortungsbewusst kann man erst mit dem Thema umgehen, wenn vorher die Aufklärung stattgefunden hat. Das einzige was uns noch daran hindert sind veraltete Ansichten oder nicht gelöste Schamgefühle. Wir alle sind menschlich. Wir als Zauberergemeinschaft halten schon seit Jahrhunderten unsere Identitäten geheim, warum sollen wir auch noch das Thema Sex verschweigen und nicht richtig kommunizieren?<br><br>",
+      "Die Liebesmagie ist so alt wie die Zauberei selbst, doch wurde sie lange Zeit vernachlässigt oder auf triviale Verführungszauber reduziert. Auf meinen Reisen erkannte ich die Notwendigkeit eines umfassenden Werkes, das nicht nur SIE, sondern auch IHN und vor allem PAARE berücksichtigt. Die nachfolgenden Seiten enthalten Zauberformeln und Anleitungen, die in ihrer Anwendung gleichermaßen Vergnügen, Harmonie und tiefe Verbindung ermöglichen.<br>In erster Linie widmet sich dieses Kapitel der Selbstliebe, denn nur wer sich selbst in seiner Gänze erforscht, kann auch einem anderen die Tür zu wahrer Intimität öffnen. Der Zauber 'Erectio Infinitus' hält eine Erektion für bis zu sieben Stunden, während 'Extasia Duplex' den Orgasmus in seiner Intensität verdoppelt. Wer nicht nur für sich selbst zaubern möchte, findet hier Praktisches für die Nutzung des eigenen Zauberstabs: Mit 'Mutatio Phallus' kann der Stab in ein reizvolles Objekt der Begierde verwandelt werden. Ja, in allen Formen, Farben und Größen!",
+      "Die Kunst der Liebestränke ist mächtig – doch ebenso riskant. Anders als Zauber, die bei fehlerhafter Anwendung meist nur verpuffen, können Tränke durch falsche Brauweise, Lagerung oder Dosierung unvorhersehbare Nebenwirkungen entfalten. Ein falsch angesetzter Trank kann seine Wirkung verlieren, ins Gegenteil verkehren oder, im schlimmsten Fall, eine langanhaltende Pein statt Lust bereiten. Besonders verflüchtigende Essenzen wie die in 'Aeternum Ardor', dem Dauergeil-Trank, verlieren schnell an Potenz, wenn sie nicht luftdicht versiegelt sind.<br><br>Es wird daher dringend empfohlen, vor der Anwendung einen gewöhnlichen Trankbestimmungs-Viskokular zu nutzen. Diese kleinen Gerätschaften, die für wenige Galleonen in jedem Tränkeladen erhältlich sind, analysieren die Farbe, Konsistenz und magische Signatur des Gebräus, um gefährliche Veränderungen zu erkennen. Ein sorgfältiger Brauer prüft zum Beispiel stets, ob sein 'Amoris', der Trank zur Geschmacks- und Farbveränderung von Sperma, noch seine gewünschte Wirkung hat.",
+      "Jede Hexe und jeder Zauberer hat das Recht auf Selbstbestimmung – das schließt die Entscheidung ein, ob und wann man Kinder bekommen möchte. Die magische Welt hat viele Methoden entwickelt, um eine ungewollte Schwangerschaft zu verhindern, doch die Wahl der richtigen Methode ist eine persönliche und wichtige Entscheidung, die offen besprochen werden sollte. Selbst der Eingriff eines magischen Schwangerschaftsabbruchs ist eine Möglichkeit, über die jede Hexe eigenständig entscheiden darf.<br><br>Erstaunlicherweise sind uns die Muggel in dieser Hinsicht voraus gewesen. Sie haben längst bewiesen, dass Verhütung funktioniert und ein essenzieller Bestandteil der Selbstbestimmung ist. Während Hexen und Zauberer sich noch auf riskante Schutzzauber verließen, entwickelten Muggel mechanische, hormonelle und chemische Methoden, die oft zuverlässiger sind als so mancher unpräzise gewirkte Spruch. Wer sich über Muggel-Kondome amüsiert, sollte bedenken, dass die Zaubererschaft über ein Jahrzehnt mit einer unsicheren Zauberformel verhütete.<br><br>",
+      "Man kennt es: Eine lange Nacht, gute Musik, Feuerwhiskey, und plötzlich ist es passiert – ungeschützter Geschlechtsverkehr. Spätestens am nächsten Morgen, mit pochendem Kopf, steht man im Badezimmer, blickt in den Spiegel und zaubert verzweifelt 'Expecto Protectionum!'. Doch leider, liebe Leserinnen, funktioniert dieser Zauber nicht rückwirkend.<br><br>Ich gestehe, auch ich war einmal in dieser Situation. Es war mir peinlich, es war unangenehm, aber genau daraus entstand mein Forschungsdrang. Drei Jahre voller Experimente, Fehlschläge und unzählige tapfere Freiwillige, die sich bereiterklärten, an der Entwicklung des Zauber-Danach teilzunehmen. Heute haben wir endlich eine funktionierende Lösung – aber sie ist nicht so einfach, wie viele denken.<br><br>Viele Hexen glauben, sie könnten Den-Zauber-Danach selbst ausführen, doch das ist ein Irrtum. Der Zauber erfordert das Können eines ausgebildeten Medi-Magiers. Während in seriösen magischen Krankenhäusern eine faire Gebühr erhoben wird, verlangen unseriöse Praxen oft viel mehr.",
+      "Es gibt Tage, da kann man die Finger nicht von sich lassen – und es gibt Tage, an denen selbst ein Nackttanz von Veelas nicht helfen würde. Und wenn sich aus Tagen Wochen oder gar Monate entwickeln, kann das in einer Beziehung zum Problem werden. Die sexuelle Lust verändert sich über die Zeit – das ist normal. Doch während es diverse Lust- und Liebestränke gibt, sind diese oft kurzfristige Lösungen mit potenziellen Nebenwirkungen wie Sex-Sucht oder emotionaler Abhängigkeit. Wer stattdessen eine langanhaltende, natürliche Auffrischung der Lustgefühle möchte, sollte sich meine magischen Lust-Rituale genauer ansehen. Eines der besten Rituale ist eine Kombination aus Alchemie, mentaler Verbindung und körperlicher Nähe. Es beinhaltet:<br><br>1. Das Einatmen der Dämpfe einer Alihotsi-Pflanze<br>Achtung: Lebensgefahr! In hoher Dosierung führt Alihotsi zu Hysterie oder Atemstillstand.<br><br>2. Der Lustgedankenverbindungstrank 'Coniuncta'<br>Dieser Trank wird von beiden Partnern zeitgleich getrunken.<br><br>",
+      "Nicht so schnell! Du hast gerade erst den Dildo-Transmutationszauber oder den Erektionszauber für dich entdeckt? Dann ist dieses Kapitel vielleicht noch eine Nummer zu groß für dich. Mein ehrlicher Ratschlag: Erkunde die magische Sexualität in deinem eigenen Tempo. Schnupper herum, experimentiere mit einfachen Zaubern und entdecke mit neugieriger Nase die unendlichen Möglichkeiten, die dir zur Verfügung stehen. Doch für diejenigen, die bereit sind, tiefer in die Kunst der Sex-Magie einzutauchen, öffnet sich hier eine Welt voller Macht, Lust und Grenzen, die nur du selbst definierst.<br><br>Zauber, die dich in die Knie zwingen – wortwörtlich:<br>'Genua Flecte' – Der Hinknie-Zauber zwingt dein Gegenüber mit magischer Dominanz auf den Boden. Perfekt für dominante Spielchen.<br>'Extremo Climax' – Der Orgasmus-Fluch, der dich in einem nie-endenden Höhepunkt gefangen hält. Pure Ekstase, die mit der Zeit zur Qual wird.<br>'Frustratio Maxima' – Eine sadistische Variante: Hält dich auf ewig kurz vor dem Orgasmus, ohne ihn jemals zu erreichen.<br>Wie du siehst, fangen wir hier gerade erst an.",
+      "Jede Hexe und jeder Magier, der sich in die Welt der Sex-Magie wagt, hat seine eigene Reise – voller Höhen, Tiefen, peinlicher Missgeschicke und Erleuchtungen. In diesem Kapitel teile ich zwei ganz besondere Geschichten, die zeigen, wie vielfältig und aufregend die Erfahrungen sein können.<br><br>In Hogwarts kannte man mich nur als die Sex-Hexe – anonym, aber immer mit einem offenen Ohr für alle Fragen zu Liebe und Leidenschaft. Ich hatte den Ehrgeiz, einen perfekten Erektionszauber an meinem besten Freund zu entwickeln, doch... das Experiment ging gründlich schief. Statt das Blut an die richtige Stelle zu lenken, strömte es überall hin – nur nicht dorthin, wo es sollte. Was folgte, war fast ein unromantischer Besuch in der Krankenstation. Zum Glück war der richtige Gegentrank da. Naivität. Heute kann ich darüber lachen, doch damals war mir nicht nach Humor zumute.<br>Was ich daraus gelernt habe? Langsam und sicher zaubern. Reden und Reflektieren. Verflucht viel Spaß haben!",
+      "Sex-Magie ist mehr als nur Zauber, Tränke und Rituale. Sie ist ein Spiegel unseres tiefsten Verlangens, unserer Sehnsüchte und Ängste. Sie zeigt uns, wo unsere Grenzen liegen – und wo wir sie überschreiten möchten. Sie ist nicht nur ein Spiel mit Lust, sondern eine Reise zu uns selbst. Ich habe in diesem Buch Wissen, Erfahrungen und Geheimnisse geteilt, die in unserer Welt oft hinter verschlossenen Türen bleiben. Doch was nützen die mächtigsten Zauber, wenn wir uns selbst nicht kennen? Magie beginnt immer in uns – in unserem Körper, unseren Gedanken und unserem Herzen. Vielleicht hast du in diesen Seiten neue Fantasien entdeckt, vielleicht hast du über meine Fehler geschmunzelt oder dich in den Geschichten wiedergefunden. Vielleicht hast du Lust bekommen, zu experimentieren, dich selbst zu erforschen oder mit deinem Partner neue Wege zu gehen. Was auch immer du mit diesem Wissen tust – tue es mit Freude, Respekt und Bewusstsein. Lass dich nicht von Regeln, Erwartungen oder alten Traditionen aufhalten. Deine Lust gehört dir. Deine Magie gehört dir. Und am Ende des Tages gibt es keine größere Kraft als die, die du selbst in dir entfachst."
+    ];
+
+    const rightTexts = [
+      "In meinem Abschlussjahr fing ich an erste Experimente aufzustellen. Ich erschuf eine Handvoll neue Zauber und Tränke, darunter der mittlerweile weltweit bekannte Der-Zauber-Danach, sowie der abgewandelte Liebestrank.<br><br>Nach meiner Zeit in Hogwarts habe ich zusammen mit meiner Freundin die Welt bereist. Ich redete mit unzähligen Menschen aus den verschiedensten Ländern und die Themen Liebe und Sex, sowie deren Probleme waren universell. Die Arbeit an Magica Amatoria nahm mächtig Fahrt auf und spätestens nach dem ersten Zaubererkrieg erhielt das Thema magischer Sex seine verdiente Aufmerksamkeit. Auch wenn ich mittlerweile als Pionierin in diesem Gebiet gelte, so sind wir meiner Meinung nach als Gesellschaft noch nicht weit genug gegangen.<br><br>Und jetzt kommst du: Egal ob du noch im Teenager Alter bist und gerade den Verhütungszauberspruch suchst oder ob du schon einiges an Erfahrung auf dem Buckel hast, dein Engagement wird gebraucht dieses Thema zu enttabuisieren. Wer mich kennt weiß, ich nehme kein Blatt vor den Mund, also lass uns loslegen!",
+      "Etwas nicht auszusprechen, macht die Sache immer noch nicht besser. Eine Freundin von mir wurde während ihrer Schulzeit schwanger, ein Junge aus der Parallelklasse hat sein Penis aus Versehen magisch geschrumpft und unser Muggelkunde Lehrer konnte nicht einmal erklären, was wir Mädchen zaubern könnten, wenn wir unsere Blutung haben, sondern hat uns eine Packung Muggelbinden hingeworfen. Die Probleme sind da und müssen angesprochen werden - darum darf Sex-Magie kein Tabuthema sein.<br><br>Mittlerweile hat sich zum Glück einiges getan. Weltweit wurden Unterrichtspläne angepasst, Lehrkräfte weitergebildet und in den Ministerien Abteilungen errichtet, die für magische Sicherheit beim Geschlechtsverkehr zuständig sind. Während zwar ein Grundstein für die Zukunft gelegt wurde, so gibt es noch offene Fragen, die wir beantworten müssen. Ist es ethisch vertretbar Squibs in der Schwangerschaft zu erkennen? Wie gehen wir mit magischer Sex-Sucht richtig um? Wie stellen wir auch in unsicheren Zeiten sicher, dass wertvolles Sex-Wissen nicht wieder verboten wird?<br><br>So wie die Magie sich wandelt, wandeln sich auch Ansichten. Meine Bitte: schenkt dieses Buch eurer Tochter oder eurem Sohn in der Pubertät.",
+      "Ebenso hilfreich für lustvolle Momente sind 'Osculum Dulcis' für leidenschaftlich verstärkte Küsse und Berührungen sowie 'Lingua Maxima' für eine beeindruckende Erweiterung der oralen Möglichkeiten.<br><br>Für Paare, die wahre Magie in ihrer Vereinigung spüren wollen, gibt es 'Climax Unitas', das Liebende gemeinsam zum Höhepunkt führt, sowie 'Fortitudo Aeternum', das für übernatürliche Ausdauer sorgt. Wer nicht nur den Körper, sondern auch die Gedanken des anderen ergründen möchte, kann mit 'Coniuncta' tiefste Lustgedanken teilen und die Leidenschaft seines Partners auf völlig neue Weise erfahren. Jeder Gedanke wird geteilt. Natürlich gibt es noch viele weitere Zauber, die eure Lust sprengen werden. Doch haltet ein: lest euch genau die Zauberanleitungen durch und übt für den Notfall die Gegenflüche. Alle Zauber wurden ausführlich getestet, doch sollten unerwartete Symptome auftreten, so sucht den nächsten Medi-Magier auf. Bitte achtet IMMER darauf, das euer Partner oder eure Partnerin mit allem einverstanden ist und ihr euch der Risiken bewusst seid.<br><br> Auf guten Sex!",
+      "Besonders wirkungsvoll, aber mit Bedacht zu nutzen, sind Tränke wie 'Fluxus Maximus', der die Ejakulationsmenge maximiert, oder 'Tactus Divinus', der jede Berührung intensiver macht. Solche Essenzen erfordern exakte Dosierung, um eine Überreizung zu vermeiden.<br><br>Ein besonders heikler Trank ist 'Passio Profunda', ein modifizierter Liebestrank, der nicht wie herkömmliche Tränke blindwütige Verliebtheit auslöst, sondern bewusste, leidenschaftliche Anziehung fördert. Doch Vorsicht! Bei zu häufiger Anwendung kann eine Abhängigkeit entstehen, die den Geist vernebelt und in ungesunde Sehnsucht umschlagen kann.<br><br>Zu den wohl kompliziertesten Sex-Tränken zählt der 'Vaginus' Trank, der die Vagina zeitweise in eine Höhle der Lust verwandelt, die jeden Penis verschlingen und verwöhnen möchte. Auf den nächsten Seiten findet ihr detaillierte Brauanleitungen für diese und weitere Elixiere der Verführung. Doch bedenkt: Magietränke der Lust sind ein zweischneidiges Schwert – wer sie beherrscht, trägt große Verantwortung.",
+      "Auf den nächsten Seiten werden diverse magische Verhütungsmethoden für Hexen und Zauberer vorgestellt. Die verbreitetste Technik ist die Einführung des Zauberstabs in die Vagina, während die Zauberformel 'Expecto Protectionum' gesprochen wird. Dieser Zauber saugt buchstäblich das Sperma des Mannes auf und muss somit jedes Mal nach dem Akt angewandt werden. Es kommt hinzu, dass Fehlaussprache die Wirkung beeinträchtigt.<br><br>Für Zauberer existiert der 'Saccus Immobilus'-Zauber, im Volksmund auch Sack-Starre genannt. Dieser bewirkt eine temporäre Blockade der Samenleiter für bis zu 30 Minuten, birgt aber das Risiko, dass die Wirkung plötzlich nachlässt.<br><br>Wer nach einer zuverlässigen Lösung sucht, kann zu Verhütungstränken greifen. Diese müssen jedoch täglich eingenommen werden, um ihre Wirkung zu behalten. Doch Vorsicht: Viele Tränke wie der 'Fertilitatis Expello', oder auch 'Pello', haben Nebenwirkungen, darunter Stimmungsschwankungen, Übelkeit oder gelegentliche Magenkrämpfe.<br><br>Wie immer gilt: Wer sich auf Verhütung durch Zauberei verlässt, sollte die Risiken kennen und keiner Methode blind vertrauen.",
+      "Der Zauber-Danach ist eine Kombination aus einem hochwirksamen Elixier – dem 'Purgatio Vitae'-Trank – und einem gezielten Zauberspruch, der den Körper innerhalb von 30 bis 60 Minuten von einer ungewollten Empfängnis befreit. Die Frau legt sich dabei in eine entspannte Position, bis die Prozedur vorbei ist. Doch Der-Zauber-Danach ist leider nicht ohne Nebenwirkungen: Übelkeit, Schwindel und Krämpfe sind häufig, ebenso wie die ironische Nebenwirkung eines gesteigerten sexuellen Verlangens nach der Behandlung.<br><br>Mein Rat: Nehmt euren Partner mit zur Behandlung und sobald die Prozedur und die üblen Nebenwirkungen vorbei sind könnt ihr es wieder - verhütet - krachen lassen!<br><br>Der-Zauber-Danach ist die bisher einzige Möglichkeit, eine Schwangerschaft nach ungeschütztem Geschlechtsverkehr noch zu verhindern. Er ist nicht angenehm, er ist nicht billig – aber er gibt Hexen eine zweite Chance, wenn alles andere versagt hat. Informiert euch bei eurem Medi-Magier, solltet ihr die Entscheidung treffen eine Schwangerschaft wieder magisch abzubrechen.",
+      "3. Langes Kuscheln und gegenseitige Berührungen<br>Die physische Nähe ist essenziell, um die magische Verbindung zu vertiefen.<br><br>Dabei sind Ruhe und Dunkelheit für das Ritual sehr entscheidend. In den folgenden Seiten werden noch zwei weitere, weniger aufwendige, aber dafür nicht so intensive Rituale vorgestellt. An dieser Stelle möchte ich allerdings noch den Tipp geben: Bevor man versucht mit Magie ein Problem zu lösen, sollte man vorher einfach mal versuchen viel miteinander zu reden und zu reflektieren, denn oft sind es tieferliegende Probleme, die man an der Alraunen-Wurzel packen- und aus dem Beet der Sorgen entfernen muss.<br><br> Für alle die sagen, dass die sexuelle Lust ihren Alltag nicht im positiven, sondern im negativen beeinflusst, gibt es am Ende dieses Kapitels auch ein Lust-Ritual, welches die sexuellen Gefühle für eine Weile besänftigt. Dies kann vor allem in der Prüfungsphase oder bei Vorstellungsgesprächen von Vorteil sein. Mein bester Freund hätte das in der Abschlussprüfungswoche von Hogwarts gut gebrauchen können, während ich so viel Sex hatte wie nie zuvor, weil ich dadurch entspannter und weniger nervös bin. Jeder Mensch ist anders, also versucht das für euch passende magische Lust-Ritual herauszufinden.",
+      "Magische Dominanzspiele gehen über einfache Fesselzauber (Incarcerus Amator) oder Spreizzauber (Divaricatus) hinaus. Für die, die noch weiter gehen möchten, gibt es in diesem Kapitel:<br><br>Schlagzauber (Flagellatio Dulcis) – Verpasst sinnliche oder heftige magische Hiebe, die Lust und Schmerz erzeugen.<br>Schmerz-Tränke (Dolor Voluptas) – Verstärken den Genuss von schmerzhaften Reizen.<br>Gehorsamkeits-Tränke (Obedientia Liquor) – Lassen deinen Partner williger werden – Vorsicht: ethische Grenzen beachten!<br>Verwandlungszauber für magisches Sexspielzeug – Von lebendigen Peitschen bis hin zu geisterhaften Händen die dich festhalten, kitzeln oder in dich eindringen.<br>Gedankenmanipulations-Zauber (Obliviosa Libido) – ist es ein Penis in dir oder doch fünf? Ist es dein Partner oder ein Fremder?<br><br>Sei ehrlich, dieses Kapitel interessiert dich doch am meisten.<br><br> Trotzdem: Haltet inne, schaut euch die Risiken an und denkt immer daran ein Notfall-Entzauberungswort festzulegen, um jede Sex-Magie sofort abzubrechen.",
+      "Ein schottischer Zauberer – der lieber anonym bleiben möchte – erzählte mir von seiner Verwandlung durch Magica Amatoria.<br><br>'Ich war schüchtern. Wirklich schüchtern. Frauen? Gespräche darüber? Ich bin lieber mit einem Buch untergetaucht. Doch als ich Magica Amatoria las, begriff ich, dass es um mehr als nur Zauber geht – es geht um Selbstvertrauen.' Anfangs nutzte er die Magie nur für sich allein, entdeckte seinen eigenen Körper und die Macht der Selbstliebe. Das gab ihm eine völlig neue Sicherheit – und als er schließlich seine spätere Ehefrau kennenlernte, öffnete sich eine Welt voller ungeahnter Möglichkeiten.<br><br> 'Was als zaghafte Berührung begann, wurde schnell zu wilden Experimenten. Wir haben uns mit Sex-Magie in völlig neue Dimensionen katapultiert – ob zu zweit oder mal zu dritt. Unsere verregneten Urlaube verwandelten sich in endlos lusterfüllte Wochenenden, von denen ich früher nur träumen konnte.' Sein Fazit? 'Die wahre Magie war nicht nur die Zauberei – sondern das Wissen, was ich wirklich will, und das Selbstbewusstsein, es zu leben.' Ob Missgeschicke oder Erfolge – Sex-Magie ist ein Abenteuer. Jeder hat seine eigene Reise, seine eigenen Grenzen und Fantasien.",
+      "Ich bedanke mich bei allen die mir geholfen haben auf meinem Weg. Die mich jahrelang begleitet haben. Und besonders bei denen, die viel zu früh von uns gegangen sind - ich vermisse euch so sehr. Es gibt keinen Zauber der Welt, der mein Herz reparieren könnte. Magica Amatoria ist mein Lebenswerk - meine Bestimmung. Und wenn ich nochmal die Chance dafür bekommen könnte, ich würde es genau so wieder machen.<br><br>In dem Sinn, viel Spaß und passt auf euch auf, eure Sex-Hexe<br>Celia Pettifly"
+    ];
+
+    const coverContainer = document.getElementById("coverContainer");
+    const coverImage = document.getElementById("coverImage");
+    const bookContainer = document.getElementById("bookContainer");
+    const leftPage = document.getElementById("leftPage");
+    const rightPage = document.getElementById("rightPage");
+    const navLeft = document.getElementById("navLeft");
+    const navRight = document.getElementById("navRight");
+    const audioEl = document.getElementById("audio");
+    const navAudio = new Audio("https://files.catbox.moe/5gwm9j.mp3");
+
+    document.addEventListener("click", function(e) {
+      if (currentPage === 0) {
+        audioEl.play();
+        coverImage.src = "https://i.imgur.com/p4okceM.png";
+        bookContainer.style.display = "flex";
+        currentPage = 1;
+        renderPage();
+      }
+    });
+
+    navLeft.addEventListener("click", function(e) {
+      e.stopPropagation();
+      if (currentPage === 0) return;
+      navAudio.play();
+      if (currentPage > 0) {
+        currentPage--;
+        if (currentPage === 0) {
+          coverImage.src = "https://i.imgur.com/ijCe9Pd.png";
+          bookContainer.style.display = "none";
+        } else {
+          renderPage();
+        }
+      }
+    });
+
+    navRight.addEventListener("click", function(e) {
+      e.stopPropagation();
+      if (currentPage === 0) return;
+      navAudio.play();
+      if (currentPage < totalPages - 1) {
+        currentPage++;
+        coverImage.src = "https://i.imgur.com/p4okceM.png";
+        bookContainer.style.display = "flex";
+        renderPage();
+      }
+    });
+
+    function renderPage() {
+      if (currentPage === 1) {
+        leftPage.innerHTML = `<h2 style="text-align:center;">Widmung</h2>
+<p>Ich widme dieses Buch meiner Blume und meiner Sonne.<br><br><br> Ohne euch, wäre dieses Buch nicht möglich gewesen. Ich danke euch von ganzem Herzen.</p>`;
+        rightPage.innerHTML = `<h2 style="text-align:center;">Inhaltsverzeichnis</h2>
+<ul>
+  <li>I. Vorwort</li>
+  <li>II. Warum Magie und Sex kein verbotenes Thema sein sollte</li>
+  <li>III. Praktische Sex-Zaubersprüche für SIE, für IHN und für PAARE</li>
+  <li>IV. Sex-Tränke, Verführungstränke und deren Gefahren</li>
+  <li>V. Verhütung durch Zauberei</li>
+  <li>VI. Der-Zauber-Danach</li>
+  <li>VIII. Magische Lust Rituale und deren Risiken</li>
+  <li>IX. Praktiken für Erfahrene</li>
+  <li>X. Persönliche Geschichten und Berichte</li>
+  <li>XI. Nachwort</li>
+</ul>`;
+      } else if (currentPage >= 2 && currentPage < totalPages) {
+        const chapterIndex = currentPage - 2;
+        const chapterTitle = chapters[chapterIndex];
+        leftPage.innerHTML = `<h2 style="text-align:center;">${chapterTitle}</h2>
+<p>${leftTexts[chapterIndex]}</p>`;
+        rightPage.innerHTML = `<p>${rightTexts[chapterIndex]}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
